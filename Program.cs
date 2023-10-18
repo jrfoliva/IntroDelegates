@@ -3,14 +3,16 @@
 namespace IntroDelegates
 {
         
-    delegate double BinaryNumericOperation(double n1, double n2);
+    //delegate double BinaryNumericOperation(double n1, double n2);
+    delegate void BinaryNumericOperation(double n1, double n2);
+
     internal class Program
     {
         static void Main(string[] args)
         {
             double a = 10;
             double b = 12;
-
+            /*
             //double result = CalculationServices.Max(a, b); // uso normal
             BinaryNumericOperation op = CalculationServices.Max; // op terá a referência do método da classe max
             BinaryNumericOperation op1 = CalculationServices.Sum;
@@ -22,6 +24,11 @@ namespace IntroDelegates
             result = op.Invoke(a, b);
             Console.WriteLine("O maior :" + result);
             Console.WriteLine("A Soma: " + op1(a, b));
+            */
+            // Delegates multcast
+            BinaryNumericOperation op = CalculationServices.Max;
+            op += CalculationServices.Sum; // Acrescentando + um método
+            op.Invoke(a, b); // na chamada, será executado os dois métodos referenciados.
 
         }
     }
